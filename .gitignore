@@ -1,0 +1,9 @@
+# Python artifacts
+__pycache__/
+*.pkg
+
+# Environment variables
+.env
+.DS_Store
+
+.vscode/
