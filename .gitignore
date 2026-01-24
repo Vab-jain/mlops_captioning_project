@@ -1,9 +1,10 @@
 # Python artifacts
 __pycache__/
 *.pkg
+*_cache
 
 # Environment variables
-.streamlit/secrets.toml
+frontend/.streamlit/secrets.toml
 .env
 .DS_Store
 
