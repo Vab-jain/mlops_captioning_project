@@ -3,6 +3,7 @@ __pycache__/
 *.pkg
 
 # Environment variables
+.streamlit/secrets.toml
 .env
 .DS_Store
 

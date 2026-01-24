@@ -16,7 +16,7 @@ urllib3_cn.allowed_gai_family = allowed_gai_family
 # ---------------------------------------------------
 
 # URL of your Lambda function
-url = "https://xma52hzedr7uvvbzxjxyfhgeta0rhhyh.lambda-url.eu-central-1.on.aws/"
+API_URL = st.secrets.get("API_URL", "http://localhost:8000")
 
 st.title("Image Captioning Tool")
 st.write("Upload an image and the AI will describe it for you.")
@@ -46,10 +46,16 @@ def compress_image(uploaded_file):
     return img_byte_arr
 
 # --- MAIN UI ---
+# PRE-WARM the server
+# This runs as soon as the page is refreshed/opened
+try:
+    requests.get(API_URL) 
+except:
+    pass
 
 if st.sidebar.button("Test Connection"):
     try:
-        res = requests.get(url)
+        res = requests.get(API_URL)
         if res.status_code == 200:
             st.sidebar.success("Connected to Backend!")
         else:
@@ -74,7 +80,7 @@ if uploaded_file is not None:
                 
                 # 3. Send with a timeout to handle cold starts
                 from urllib.parse import urljoin
-                full_url = urljoin(url, "get_caption")
+                full_url = urljoin(API_URL, "get_caption")
                 
                 # 2. Measure Request (Upload + Wait) Time
                 t2 = time.time()
