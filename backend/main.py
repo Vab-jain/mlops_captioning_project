@@ -4,15 +4,18 @@ from PIL import Image
 from fastapi import FastAPI, UploadFile
 from mangum import Mangum
 
-model_path = "./model_local"
 
 # SETUP
-# load the image captioning model and corresponding tokenizer and image processor
-model = VisionEncoderDecoderModel.from_pretrained(model_path)
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-image_processor = AutoImageProcessor.from_pretrained(model_path)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    model_path = "./model_local"
+    # load the image captioning model and corresponding tokenizer and image processor
+    model = VisionEncoderDecoderModel.from_pretrained(model_path)
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    image_processor = AutoImageProcessor.from_pretrained(model_path)
+    yield
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 handler = Mangum(app)
 
 @app.get("/")
