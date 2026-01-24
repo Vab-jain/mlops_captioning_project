@@ -3,7 +3,7 @@ import requests, time
 from PIL import Image
 from fastapi import FastAPI, UploadFile
 from mangum import Mangum
-
+from contextlib import asynccontextmanager
 
 # SETUP
 @asynccontextmanager
