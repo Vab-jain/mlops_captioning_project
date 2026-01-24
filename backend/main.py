@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoImageProcessor, VisionEncoderDecoderModel
 import requests, time
 from PIL import Image
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, Request
 from mangum import Mangum
 from contextlib import asynccontextmanager
 
@@ -10,9 +10,9 @@ from contextlib import asynccontextmanager
 async def lifespan(app: FastAPI):
     model_path = "./model_local"
     # load the image captioning model and corresponding tokenizer and image processor
-    model = VisionEncoderDecoderModel.from_pretrained(model_path)
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    image_processor = AutoImageProcessor.from_pretrained(model_path)
+    app.state.model = VisionEncoderDecoderModel.from_pretrained(model_path)
+    app.state.tokenizer = AutoTokenizer.from_pretrained(model_path)
+    app.state.image_processor = AutoImageProcessor.from_pretrained(model_path)
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -23,7 +23,12 @@ def health_ok():
     return {'health_ok': True}
 
 @app.post("/get_caption")
-def get_caption(input_img: UploadFile):
+def get_caption(request: Request, input_img: UploadFile):
+    # Retrieve from app.state
+    model = request.app.state.model
+    tokenizer = request.app.state.tokenizer
+    image_processor = request.app.state.image_processor
+
     start = time.time()
     
     # LOADING IMAGE
