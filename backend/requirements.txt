@@ -5,5 +5,5 @@ Pillow
 uvicorn
 transformers
 requests
-# Explicitly pin numpy to prevent the compiler crash if other libs need it
+# Explicitly pin numpy to prevent the compiler crash if other libs need it.
 numpy<2.0
