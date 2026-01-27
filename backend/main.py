@@ -1,9 +1,11 @@
 from transformers import AutoTokenizer, AutoImageProcessor, VisionEncoderDecoderModel
 import requests, time
-from PIL import Image
-from fastapi import FastAPI, UploadFile, Request
+from PIL import Image, UnidentifiedImageError
+from fastapi import FastAPI, UploadFile, Request, HTTPException
 from mangum import Mangum
 from contextlib import asynccontextmanager
+
+
 
 # SETUP
 @asynccontextmanager
@@ -32,7 +34,14 @@ def get_caption(request: Request, input_img: UploadFile):
     start = time.time()
     
     # LOADING IMAGE
-    image = Image.open(input_img.file)
+    try:
+        image = Image.open(input_img.file)
+        image.verify()  # validates image integrity
+        input_img.file.seek(0)  # IMPORTANT after verify()
+        image = Image.open(input_img.file)
+    except (UnidentifiedImageError, OSError):
+        raise HTTPException(status_code=400, detail="Invalid image file")
+
     pixel_values = image_processor(image, return_tensors="pt").pixel_values
 
     # generate caption - suggested settings

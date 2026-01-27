@@ -49,7 +49,8 @@ def compress_image(uploaded_file):
 # PRE-WARM the server
 # This runs as soon as the page is refreshed/opened
 try:
-    requests.get(API_URL) 
+    with st.spinner("Loading AI model... this might take a moment."):
+        requests.get(API_URL) 
 except:
     pass
 
@@ -73,7 +74,10 @@ if uploaded_file is not None:
             try:
                 # 1. Measure Compression Time
                 t0 = time.time()
-                compressed_file = compress_image(uploaded_file)
+                try:
+                    compressed_file = compress_image(uploaded_file)
+                except Exception as e:
+                    st.error(f"There was an Error during image compression: {e}")
                 t1 = time.time()
                 st.write(f"Compression took: {t1 - t0:.2f} seconds")
                 st.write(f"File size: {compressed_file.getbuffer().nbytes / 1024:.2f} KB")
