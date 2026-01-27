@@ -18,7 +18,14 @@ The core engineering goal was to deploy a relatively large ML model in a resourc
 
 The user interacts with a Streamlit UI that validates and compresses images before sending them to the backend.
 
-![Demo](/docs/images/demo.gif)
+<!--
+Source - https://stackoverflow.com/a
+Posted by Tieme, modified by community. See post 'Timeline' for change history
+Retrieved 2026-01-27, License - CC BY-SA 4.0
+-->
+
+<img src="/docs/images/demo.gif" alt="Demo" width="80%">
+
 
 ### The API Response
 
