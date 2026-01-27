@@ -1,0 +1,14 @@
+name: hello-github-action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Hello World
+        run: echo "Hello. The current server time is $(date)."
+
