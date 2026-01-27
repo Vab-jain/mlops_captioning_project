@@ -1,0 +1,35 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [ deploy ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Setup QEMU for multi-architecture support (ARM64)
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # 2. Setup Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3. Build the image (but don't push yet)
+      - name: Build
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          platforms: linux/arm64
+          push: false  # Change to true once we have AWS Auth
+          tags: my-image-captioning:latest
+          # 4. Use GitHub cache to speed up PyTorch/Model layers
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
