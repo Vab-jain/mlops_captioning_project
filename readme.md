@@ -18,7 +18,7 @@ The core engineering goal was to deploy a relatively large ML model in a resourc
 
 The user interacts with a Streamlit UI that validates and compresses images before sending them to the backend.
 
-![Demo](/docs/images/output.gif){ .image25percent }
+![Demo](/docs/images/demo.gif)
 
 ### The API Response
 
