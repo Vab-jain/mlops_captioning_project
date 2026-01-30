@@ -41,10 +41,6 @@ Below is a sample response from the FastAPI backend running on Lambda (ARM64).
 
 ```
 
-### Deployment Pipeline
-
-![Insert Screenshot: GitHub Actions Pipeline Success Log]
-
 ---
 
 ## 2. Architecture & Design Choices
