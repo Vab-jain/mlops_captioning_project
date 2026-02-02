@@ -46,6 +46,7 @@ jobs:
           tags: ${{ steps.login-ecr.outputs.registry }}/playground/image-captioner-mini:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          provenance: false
 
       # 5. UPDATE LAMBDA
       - name: Update Lambda function
