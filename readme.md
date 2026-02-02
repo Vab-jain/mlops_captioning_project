@@ -100,6 +100,8 @@ The project uses GitHub Actions for robust deployment and validation.
 * **Layer Caching:** I utilized GitHub Actions caching (`cache-to: type=gha`) to cache Docker layers. This significantly reduced build times by preventing the re-downloading of heavy PyTorch dependencies on every run.
 * **Security:** Used OIDC for AWS authentication to avoid hardcoding long-lived credentials.
 
+![Github Actions Deployment Workflow](./docs/images/github_actions_cicd.png)
+
 ---
 
 ## 5. How to Run Locally
