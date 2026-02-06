@@ -1,8 +1,12 @@
 # Serverless Image Captioning API
 
-> **Status:** MVP / Proof of Concept<br>
-> **Tech Stack:** FastAPI, AWS Lambda (Docker), Streamlit, GitHub Actions<br>
-> **Pre-trained Model:** `cnmoro/mini-image-captioning`
+**Status** ![Status](https://img.shields.io/badge/Status-MVP%20%2F%20Proof%20of%20Concept-orange)
+
+**Tech Stack** ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi) ![AWS Lambda](https://img.shields.io/badge/AWS_Lambda-FF9900?style=flat&logo=aws-lambda&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat&logo=github-actions&logoColor=white)
+
+**Model** [![Model](https://img.shields.io/badge/Pre--trained_Model-cnmoro%2Fmini--image--captioning-blueviolet?logo=huggingface)](https://huggingface.co/cnmoro/mini-image-captioning)
+
+### Project Overview
 
 This project demonstrates **ML Inference with Bounded Execution** in a constrained environment. It exposes a lightweight image-captioning service via a FastAPI backend deployed on AWS Lambda, with a Streamlit frontend for user interaction.
 
@@ -24,7 +28,9 @@ Posted by Tieme, modified by community. See post 'Timeline' for change history
 Retrieved 2026-01-27, License - CC BY-SA 4.0
 -->
 
-<img src="/docs/images/demo.gif" alt="Demo" width="80%">
+<div align="center">
+  <img src="/docs/images/demo.gif" alt="Demo" width="80%">
+</div>
 
 
 ### The API Response
@@ -48,7 +54,9 @@ Below is a sample response from the FastAPI backend running on Lambda (ARM64).
 **The Challenge:** ML models are resource-hungry, but standard "always-on" GPU instances are expensive for sporadic workloads.
 **The Solution:** Minimizing computation via serverless deployment while fighting the "cold-start" problems inherent to AWS Lambda.
 
-![Architecture Diagram](./docs/images/arch.png)
+<div align="center">
+  <img src="./docs/images/arch.png" alt="Architecture Diagram">
+</div>
 
 ### Key Constraints & Scope
 
@@ -143,8 +151,6 @@ Open your browser to the URL shown in Terminal 2 (usually `http://localhost:8501
 ---
 
 ## 6. Reflections & Future Work
-
-This project required me to move beyond "making the model work" to "making the system work."
 
 **Key Learnings:**
 
